@@ -54,37 +54,71 @@ import javax.annotation.Nullable;
 public interface PlaceholderService {
 
     /**
-     * Parses a string on behalf of a {@link MessageReceiver}.
+     * Gets a {@link PlaceholderText} based on the provided token.
      *
      * <p>It is entirely up to the implementation of the service to determine
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
-     * @param messageReceiver The source that tokens should use as a context.
-     *  May be {@code null}, but some tokens may not parse without this
-     *  supplied.
      * @param token The token to obtain.
      * @return The parsed {@link Text}.
      */
-    default Optional<PlaceholderText> parse(@Nullable MessageReceiver messageReceiver, String token) {
-        return this.parse(messageReceiver, token, null);
+    default Optional<PlaceholderText> parse(String token) {
+        return this.parse(token, "", null);
     }
 
     /**
-     * Parses a string on behalf of a {@link MessageReceiver}.
+     * Gets a {@link PlaceholderText} based on the provided token,
+     * using the provided {@link MessageReceiver} for context.
      *
      * <p>It is entirely up to the implementation of the service to determine
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
+     * @param token The token to obtain.
      * @param messageReceiver The source that tokens should use as a context.
      *  May be {@code null}, but some tokens may not parse without this
      *  supplied.
+     * @return The parsed {@link Text}.
+     */
+    default Optional<PlaceholderText> parse(String token, @Nullable MessageReceiver messageReceiver) {
+        return this.parse(token, "", messageReceiver);
+    }
+
+    /**
+     * Gets a {@link PlaceholderText} based on the provided token,
+     * using the provided {@link MessageReceiver} and supplied argument string
+     * for context.
+     *
+     * <p>It is entirely up to the implementation of the service to determine
+     * how to select a placeholder if the supplied {@code token} is not a
+     * known ID for a registered {@link PlaceholderParser}.</p>
+     *
      * @param token The token name.
      * @param arguments The arguments for the token.
      * @return The parsed {@link TextRepresentable}, if any.
      */
-    Optional<PlaceholderText> parse(@Nullable MessageReceiver messageReceiver, String token, @Nullable String arguments);
+    default Optional<PlaceholderText> parse(String token, String arguments) {
+        return this.parse(token, arguments, null);
+    }
+
+    /**
+     * Gets a {@link PlaceholderText} based on the provided token,
+     * using the provided {@link MessageReceiver} and supplied argument string
+     * for context.
+     *
+     * <p>It is entirely up to the implementation of the service to determine
+     * how to select a placeholder if the supplied {@code token} is not a
+     * known ID for a registered {@link PlaceholderParser}.</p>
+     *
+     * @param token The token name.
+     * @param arguments The arguments for the token.
+     * @param messageReceiver The source that tokens should use as a context.
+     *  May be {@code null}, but some tokens may not parse without this
+     *  supplied.
+     * @return The parsed {@link TextRepresentable}, if any.
+     */
+    Optional<PlaceholderText> parse(String token, String arguments, @Nullable MessageReceiver messageReceiver);
 
     /**
      * Returns a builder that creates a {@link PlaceholderText} for use in

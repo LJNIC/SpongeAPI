@@ -51,6 +51,15 @@ import java.util.function.Supplier;
 public interface PlaceholderText extends TextRepresentable {
 
     /**
+     * Gets a builder for creating {@link PlaceholderText}.
+     *
+     * @return A {@link Builder}
+     */
+    static PlaceholderText.Builder builder() {
+        return Sponge.getServiceManager().provideUnchecked(PlaceholderService.class).placeholderBuilder();
+    }
+
+    /**
      * Gets the {@link PlaceholderParser} that handles this
      * placeholder.
      *
@@ -114,7 +123,7 @@ public interface PlaceholderText extends TextRepresentable {
 
         /**
          * Sets the {@link MessageReceiver} to use as a source of information
-         * for this {@link PlaceholderText}. If {@code null}, removes this source.
+         * for this {@link PlaceholderText} to the supplied {@link Player}.
          *
          * @param player The player to associate this text with.
          * @return This, for chaining
@@ -144,7 +153,8 @@ public interface PlaceholderText extends TextRepresentable {
          * supplied to {@link #setParser(PlaceholderParser)} and thus is
          * not prescribed here.
          *
-         * @param string The argument string, may be null
+         * @param string The argument string, may be null to reset to
+         *      the default argument string
          * @return This, for chaining
          *
          * @see PlaceholderText#getArgument()
