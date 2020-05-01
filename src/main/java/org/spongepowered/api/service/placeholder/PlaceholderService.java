@@ -24,8 +24,6 @@
  */
 package org.spongepowered.api.service.placeholder;
 
-import org.spongepowered.api.CatalogType;
-import org.spongepowered.api.GameRegistry;
 import org.spongepowered.api.event.game.GameRegistryEvent;
 import org.spongepowered.api.service.ServiceManager;
 import org.spongepowered.api.text.Text;
@@ -33,8 +31,6 @@ import org.spongepowered.api.text.TextRepresentable;
 import org.spongepowered.api.text.channel.MessageReceiver;
 
 import java.util.Optional;
-
-import javax.annotation.Nullable;
 
 /**
  * A service that handles the parsing of placeholder tokens. This service is
@@ -45,8 +41,7 @@ import javax.annotation.Nullable;
  * be used in {@link Text}.</p>
  *
  * <p>Plugins wishing to supply placeholders should supply them via the
- * appropriate {@link GameRegistryEvent.Register} event or via
- * {@link GameRegistry#register(Class, CatalogType)}.</p>
+ * appropriate {@link GameRegistryEvent.Register} event.</p>
  *
  * <p>This service makes no assumption about how a plugin parses/tokenizes a
  * string in order to determine what placeholders to use.</p>
@@ -63,9 +58,7 @@ public interface PlaceholderService {
      * @param token The token to obtain.
      * @return The parsed {@link Text}.
      */
-    default Optional<PlaceholderText> parse(String token) {
-        return this.parse(token, "", null);
-    }
+    Optional<PlaceholderText> parse(String token);
 
     /**
      * Gets a {@link PlaceholderText} based on the provided token,
@@ -77,13 +70,9 @@ public interface PlaceholderService {
      *
      * @param token The token to obtain.
      * @param messageReceiver The source that tokens should use as a context.
-     *  May be {@code null}, but some tokens may not parse without this
-     *  supplied.
      * @return The parsed {@link Text}.
      */
-    default Optional<PlaceholderText> parse(String token, @Nullable MessageReceiver messageReceiver) {
-        return this.parse(token, "", messageReceiver);
-    }
+    Optional<PlaceholderText> parse(String token, MessageReceiver messageReceiver);
 
     /**
      * Gets a {@link PlaceholderText} based on the provided token,
@@ -98,9 +87,7 @@ public interface PlaceholderService {
      * @param arguments The arguments for the token.
      * @return The parsed {@link TextRepresentable}, if any.
      */
-    default Optional<PlaceholderText> parse(String token, String arguments) {
-        return this.parse(token, arguments, null);
-    }
+    Optional<PlaceholderText> parse(String token, String arguments);
 
     /**
      * Gets a {@link PlaceholderText} based on the provided token,
@@ -114,11 +101,9 @@ public interface PlaceholderService {
      * @param token The token name.
      * @param arguments The arguments for the token.
      * @param messageReceiver The source that tokens should use as a context.
-     *  May be {@code null}, but some tokens may not parse without this
-     *  supplied.
      * @return The parsed {@link TextRepresentable}, if any.
      */
-    Optional<PlaceholderText> parse(String token, String arguments, @Nullable MessageReceiver messageReceiver);
+    Optional<PlaceholderText> parse(String token, String arguments, MessageReceiver messageReceiver);
 
     /**
      * Returns a builder that creates a {@link PlaceholderText} for use in
