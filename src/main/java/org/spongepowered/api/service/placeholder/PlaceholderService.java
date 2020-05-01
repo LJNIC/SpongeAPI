@@ -68,8 +68,8 @@ public interface PlaceholderService {
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
-     * @param token The token to obtain.
-     * @param messageReceiver The source that tokens should use as a context.
+     * @param token The token to obtain
+     * @param messageReceiver The source that tokens should use as a context
      * @return The parsed {@link Text}.
      */
     Optional<PlaceholderText> parse(String token, MessageReceiver messageReceiver);
@@ -84,10 +84,10 @@ public interface PlaceholderService {
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
      * @param token The token name.
-     * @param arguments The arguments for the token.
+     * @param argumentString A string containing arguments for the token
      * @return The parsed {@link TextRepresentable}, if any.
      */
-    Optional<PlaceholderText> parse(String token, String arguments);
+    Optional<PlaceholderText> parse(String token, String argumentString);
 
     /**
      * Gets a {@link PlaceholderText} based on the provided token,
@@ -98,12 +98,12 @@ public interface PlaceholderService {
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
-     * @param token The token name.
-     * @param arguments The arguments for the token.
-     * @param messageReceiver The source that tokens should use as a context.
+     * @param token The token name
+     * @param argumentString A string containing arguments for the token
+     * @param messageReceiver The source that tokens should use as a context
      * @return The parsed {@link TextRepresentable}, if any.
      */
-    Optional<PlaceholderText> parse(String token, String arguments, MessageReceiver messageReceiver);
+    Optional<PlaceholderText> parse(String token, String argumentString, MessageReceiver messageReceiver);
 
     /**
      * Returns a builder that creates a {@link PlaceholderText} for use in
