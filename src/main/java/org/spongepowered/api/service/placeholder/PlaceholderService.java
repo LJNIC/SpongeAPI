@@ -55,6 +55,10 @@ public interface PlaceholderService {
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
+     * <p>The {@link PlaceholderParser} selected by the {@code token} to
+     * generate this {@link PlaceholderText} must be the same as the one
+     * returned by {@link #getParser(String)}</p>
+     *
      * @param token The token to obtain.
      * @return The parsed {@link Text}.
      */
@@ -67,6 +71,10 @@ public interface PlaceholderService {
      * <p>It is entirely up to the implementation of the service to determine
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
+     *
+     * <p>The {@link PlaceholderParser} selected by the {@code token} to
+     * generate this {@link PlaceholderText} must be the same as the one
+     * returned by {@link #getParser(String)}</p>
      *
      * @param token The token to obtain
      * @param messageReceiver The source that tokens should use as a context
@@ -83,6 +91,10 @@ public interface PlaceholderService {
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
      *
+     * <p>The {@link PlaceholderParser} selected by the {@code token} to
+     * generate this {@link PlaceholderText} must be the same as the one
+     * returned by {@link #getParser(String)}</p>
+     *
      * @param token The token name.
      * @param argumentString A string containing arguments for the token
      * @return The parsed {@link TextRepresentable}, if any.
@@ -97,6 +109,10 @@ public interface PlaceholderService {
      * <p>It is entirely up to the implementation of the service to determine
      * how to select a placeholder if the supplied {@code token} is not a
      * known ID for a registered {@link PlaceholderParser}.</p>
+     *
+     * <p>The {@link PlaceholderParser} selected by the {@code token} to
+     * generate this {@link PlaceholderText} must be the same as the one
+     * returned by {@link #getParser(String)}</p>
      *
      * @param token The token name
      * @param argumentString A string containing arguments for the token
