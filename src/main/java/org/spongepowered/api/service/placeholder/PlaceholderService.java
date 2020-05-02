@@ -106,6 +106,20 @@ public interface PlaceholderService {
     Optional<PlaceholderText> parse(String token, String argumentString, MessageReceiver messageReceiver);
 
     /**
+     * Gets the {@link PlaceholderParser} that this {@link PlaceholderService}
+     * associates with the supplied {@code token}.
+     *
+     * <p>If the token matches the ID of a registered parser, this method
+     * <strong>must</strong> return that parser. Otherwise, what is returned is
+     * dependent on this service, but if it returns a parser, it must be one
+     * that is already registered.</p>
+     *
+     * @param token The token to retrieve a {@link PlaceholderParser} for
+     * @return The {@link PlaceholderParser}, if any
+     */
+    Optional<PlaceholderParser> getParser(String token);
+
+    /**
      * Returns a builder that creates a {@link PlaceholderText} for use in
      * {@link Text} objects.
      *
