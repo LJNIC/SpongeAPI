@@ -105,7 +105,7 @@ public interface PlaceholderText extends TextRepresentable {
      *
      * @return The argument, if any
      */
-    Optional<String> getArgument();
+    Optional<String> getArgumentString();
 
     /**
      * A builder for {@link PlaceholderText} objects.
@@ -157,9 +157,9 @@ public interface PlaceholderText extends TextRepresentable {
          *      the default argument string
          * @return This, for chaining
          *
-         * @see PlaceholderText#getArgument()
+         * @see PlaceholderText#getArgumentString()
          */
-        Builder setArgument(@Nullable String string);
+        Builder setArgumentString(@Nullable String string);
 
         /**
          * Builds and returns the placeholder.
