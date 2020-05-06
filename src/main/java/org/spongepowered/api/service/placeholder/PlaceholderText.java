@@ -68,8 +68,8 @@ public interface PlaceholderText extends TextRepresentable {
     PlaceholderParser getParser();
 
     /**
-     * If provided, the {@link MessageReceiver} which to pull information
-     * from when building the placeholder text.
+     * If provided, the {@link MessageReceiver} which to pull information from
+     * when building the placeholder text.
      *
      * <p>Examples of how this might affect a placeholder are:</p>
      *
@@ -85,11 +85,13 @@ public interface PlaceholderText extends TextRepresentable {
      *     </li>
      * </ul>
      *
-     * <p>It is important to note that the associated source does not
+     * <p>It is important to note that the associated context does not
      * necessarily have to be the sender/invoker of a message, nor does it
      * have to be the recipient. The source is selected by the context of
      * builder. It is up to plugins that use such placeholders to be aware
-     * of the context of which the placeholder is used.</p>
+     * of the context of which the placeholder is used.
+     * {@link PlaceholderParser}s should make no assumption about the origin of
+     * the context.</p>
      *
      * <p>If an invalid {@link MessageReceiver} is provided for the context
      * of the placeholder, then the associated {@link PlaceholderParser} must
@@ -97,7 +99,7 @@ public interface PlaceholderText extends TextRepresentable {
      *
      * @return The associated {@link MessageReceiver}, if any.
      */
-    Optional<MessageReceiver> getAssociatedReceiver();
+    Optional<MessageReceiver> getAssociatedContext();
 
     /**
      * The variable string passed to this token to provide contextual
@@ -128,11 +130,11 @@ public interface PlaceholderText extends TextRepresentable {
          * @param player The player to associate this text with.
          * @return This, for chaining
          *
-         * @see PlaceholderText#getAssociatedReceiver()
+         * @see PlaceholderText#getAssociatedContext()
          */
-        default Builder setAssociatedSource(Player player) {
-            UUID uuid = player.getUniqueId();
-            return setAssociatedSource(() -> Sponge.getServer().getPlayer(uuid).orElse(null));
+        default Builder setAssociatedContext(Player player) {
+            final UUID uuid = player.getUniqueId();
+            return setAssociatedContext(() -> Sponge.getServer().getPlayer(uuid).orElse(null));
         }
 
         /**
@@ -143,9 +145,9 @@ public interface PlaceholderText extends TextRepresentable {
          *      {@link MessageReceiver}
          * @return This, for chaining
          *
-         * @see PlaceholderText#getAssociatedReceiver()
+         * @see PlaceholderText#getAssociatedContext()
          */
-        Builder setAssociatedSource(@Nullable Supplier<MessageReceiver> supplier);
+        Builder setAssociatedContext(@Nullable Supplier<MessageReceiver> supplier);
 
         /**
          * Sets a string that represents variables for the supplied token.
